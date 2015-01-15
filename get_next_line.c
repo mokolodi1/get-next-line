@@ -6,7 +6,7 @@
 /*   By: tfleming <tfleming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/11 13:20:06 by tfleming          #+#    #+#             */
-/*   Updated: 2015/01/15 20:14:51 by tfleming         ###   ########.fr       */
+/*   Updated: 2015/01/15 20:20:10 by tfleming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static int		setup(t_stock **stock)
 }
 
 static int		deal_with_returns(t_stock **pointer_to_stock
-								  , t_stock *stock, char **line)
+									, t_stock *stock, char **line)
 {
 	if (stock->read_ret < 0)
 		return (-1);
