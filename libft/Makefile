@@ -6,7 +6,7 @@
 #    By: tfleming <tfleming@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/04 17:52:57 by tfleming          #+#    #+#              #
-#    Updated: 2014/12/02 20:13:27 by tfleming         ###   ########.fr        #
+#    Updated: 2015/01/15 15:16:54 by tfleming         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -14,6 +14,7 @@ NAME =			libft.a
 
 CC =			gcc
 FLAGS =			-Wall -Werror -Wextra -O3
+INCLUDES =		"includes"
 
 COMPILED =		ft_islower.o \
 				ft_isupper.o \
@@ -78,7 +79,7 @@ $(NAME): $(COMPILED)
 	ranlib $(NAME)
 
 $(COMPILED): %.o: %.c
-	$(CC) -c $(FLAGS) $< -o $@
+	$(CC) -c $(FLAGS) $< -o $@ -I $(INCLUDES)
 
 clean:
 	-/bin/rm -f $(COMPILED)
