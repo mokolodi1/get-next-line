@@ -6,7 +6,7 @@
 /*   By: tfleming <tfleming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/11 13:20:06 by tfleming          #+#    #+#             */
-/*   Updated: 2014/11/25 23:36:50 by tfleming         ###   ########.fr       */
+/*   Updated: 2015/01/15 15:23:51 by tfleming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 ** increase_spill_size:
 ** increases the size of spill by at least BUF_SIZE
 ** returns non-zero if error
+*/
+
+/*
+** for better performance, replace read line with:
+** read(fd, stocks[fd]->spill + stocks[fd]->lu
+** , stocks[fd]->length - stocks[fd]->lu);
 */
 
 static int		end_of_line(t_stock *stock)
@@ -101,7 +107,7 @@ int				get_next_line(int const fd, char **line)
 			if (increase_spill_size(stocks[fd]))
 				return (-1);
 		stocks[fd]->read_ret = read(fd, stocks[fd]->spill + stocks[fd]->lu
-									, stocks[fd]->length - stocks[fd]->lu);
+									, BUF_SIZE);
 		stocks[fd]->lu += stocks[fd]->read_ret;
 	}
 	return (deal_with_returns(stocks[fd], line));
