@@ -6,12 +6,17 @@
 /*   By: tfleming <tfleming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/11 13:20:06 by tfleming          #+#    #+#             */
-/*   Updated: 2015/01/15 15:23:51 by tfleming         ###   ########.fr       */
+/*   Updated: 2015/01/15 20:14:51 by tfleming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
+
+/*
+** for deal_with_returns, the code was too atrocious with all the
+** (*stock)s, so I just pass it and also the pointer to it.
+*/
 
 /*
 ** increase_spill_size:
@@ -71,7 +76,8 @@ static int		setup(t_stock **stock)
 	return (0);
 }
 
-static int		deal_with_returns(t_stock *stock, char **line)
+static int		deal_with_returns(t_stock **pointer_to_stock
+								  , t_stock *stock, char **line)
 {
 	if (stock->read_ret < 0)
 		return (-1);
@@ -80,6 +86,8 @@ static int		deal_with_returns(t_stock *stock, char **line)
 	{
 		if (stock->spill)
 			free(stock->spill);
+		free(stock);
+		*pointer_to_stock = NULL;
 		return (0);
 	}
 	stock->lu += stock->spill - stock->line_end
@@ -110,5 +118,5 @@ int				get_next_line(int const fd, char **line)
 									, BUF_SIZE);
 		stocks[fd]->lu += stocks[fd]->read_ret;
 	}
-	return (deal_with_returns(stocks[fd], line));
+	return (deal_with_returns(&stocks[fd], stocks[fd], line));
 }
