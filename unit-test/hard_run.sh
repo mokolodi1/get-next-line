@@ -20,11 +20,8 @@ else
 	echo "files already created"
 fi
 
-ldapsearch > ldap
-
 time sh run.sh
 
 rm "factbook20"
 rm "factbook100"
 rm "factbook500"
-rm "ldap"

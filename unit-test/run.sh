@@ -78,9 +78,6 @@ fi
 if [ -f "factbook500" ]; then
 	tester "factbook500"
 fi
-if [ -f "ldap" ]; then
-	tester "ldap"
-fi
 ./test_gnl "fake" "fd"
 
 echo "================================================================================"
